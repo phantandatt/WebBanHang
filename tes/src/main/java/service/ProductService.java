@@ -19,5 +19,12 @@ public class ProductService {
 		resp.save(product);
 
 	}
-	
+
+	public List<Product> getAllProd() {
+		return resp.findAll();
+	}
+
+	public long totalProduct() {
+		return resp.count();
+	}
 }

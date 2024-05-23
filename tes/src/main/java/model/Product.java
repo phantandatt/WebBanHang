@@ -11,26 +11,27 @@ import jakarta.persistence.Table;
 @Table(name = "product")
 public class Product {
 	@Id
+	@Column(name = "ProductID")
 	int productID;
-	@Column
+	@Column(name = "productName")
 	String productName;
-	@Column
+	@Column(name = "categoryid")
 	int categoryID;
-	@Column
+	@Column(name = "Description")
 	String description;
-	@Column
+	@Column(name = "price")
 	int price;
-	@Column
+	@Column(name = "stockQuantity")
 	int stockQuantity;
-	@Column
+	@Column(name = "unit_price")
 	String unit_price;
-	@Column
+	@Column(name = "imgpath")
 	String imgPath;
-	@Column
+	@Column(name = "color")
 	String color;
 
-	public Product(int productID, String productName, int categoryID, String description, int price,
-			int stockQuantity, String unit_price, String imgPath, String color) {
+	public Product(int productID, String productName, int categoryID, String description, int price, int stockQuantity,
+			String unit_price, String imgPath, String color) {
 		super();
 		this.productID = productID;
 		this.productName = productName;
@@ -41,6 +42,10 @@ public class Product {
 		this.unit_price = unit_price;
 		this.imgPath = imgPath;
 		this.color = color;
+	}
+
+	public Product() {
+
 	}
 
 	public int getProductID() {

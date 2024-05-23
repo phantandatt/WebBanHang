@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,7 +144,7 @@
 			<span class="bg-secondary pr-3">Phân loại</span>
 		</h2>
 		<div class="row px-xl-5 pb-3">
-			<c:forEach items="${CategoryDAO.getAllCategory()}" var="category">
+			<c:forEach items="${ListCategory}" var="category">
 				<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
 					<a
 						href="shop?action=category&CategoryID=${category.getIdCategory()}"
@@ -180,7 +180,7 @@
 		</h2>
 		<div class="row px-xl-5">
 
-			<c:forEach items="${ProductDAO.getTop4LastProdByid()}" var="product">
+			<c:forEach items="${ListProduct}" var="product">
 				<div class="col-lg-3 col-md-4 col-sm-6 pb-1 ">
 					<div class="product-item bg-light mb-4">
 						<div class="product-img position-relative overflow-hidden py-4">
@@ -231,7 +231,7 @@
 		</h2>
 		<div class="row px-xl-5">
 
-			<c:forEach items="${ProductDAO.getTop4ProdByBestPrice()}"
+			<c:forEach items="${ListProduct}"
 				var="product">
 				<div class="col-lg-3 col-md-4 col-sm-6 pb-1 ">
 					<div class="product-item bg-light mb-4">

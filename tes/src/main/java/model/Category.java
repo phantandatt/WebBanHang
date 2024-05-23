@@ -11,15 +11,19 @@ import jakarta.persistence.Table;
 @Table(name = "category")
 public class Category {
 	@Id
-	@Column
+	@Column(name = "CategoryID")
 	int idCategory;
-	@Column
+	@Column(name = "category")
 	String nameCategory;
 
 	public Category(int idCategory, String nameCategory) {
 		super();
 		this.idCategory = idCategory;
 		this.nameCategory = nameCategory;
+	}
+
+	public Category() {
+
 	}
 
 	public int getIdCategory() {

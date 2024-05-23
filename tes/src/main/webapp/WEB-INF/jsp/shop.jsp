@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,7 +71,7 @@
 							<a class="" style="text-decoration: none;" href="shop">All
 								Category</a> <span class="badge border font-weight-normal">${totalProduct}</span>
 						</div>
-						<c:forEach items="${Category}" var="category">
+						<c:forEach items="${ListCategory}" var="category">
 							<div onclick="load()"
 								class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
 								<input id="CategoryID" type="hidden"
