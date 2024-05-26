@@ -1,13 +1,21 @@
 package controller;
 
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.catalina.connector.Response;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.Account;
@@ -26,10 +34,16 @@ public class Controller {
 	private AccountService service;
 	@Autowired
 	private DiscountService discountService;
+<<<<<<< Updated upstream
 	@Autowired
 	private ProductService productService;
 	@Autowired
 	private CategoryService categoryService;
+=======
+	
+	@Autowired
+	private ProductService productService;
+>>>>>>> Stashed changes
 
 	@GetMapping("/home")
 	public String getHomePage(Model model) {
@@ -57,15 +71,50 @@ public class Controller {
 	}
 
 	@GetMapping("/shop")
-	public String shop(Model model) {
+<<<<<<< Updated upstream
+	public String shop(Model model, @RequestParam(defaultValue = "0")int page) {
 		List<Category> ListCategory = categoryService.findAll();
-		List<Product> ListProduct = productService.getAllProd();
-
-		model.addAttribute("ListProduct", ListProduct);
+		
+		Page<Product> ListProduct = productService.getAllProd(page);
+		
+		model.addAttribute("ListProduct", ListProduct.getContent());
+		model.addAttribute("totalPage", ListProduct.getTotalPages());
+		model.addAttribute("pageNo",page);
 		model.addAttribute("ListCategory", ListCategory);
+=======
+	public String shop() {
+		
+>>>>>>> Stashed changes
+		
 		return "shop";
 	}
-
+	
+	
+	@GetMapping("/shop/{page}")
+	public @ResponseBody List<Product> shop1(Model model, @RequestParam int page) {
+		
+		List<Category> ListCategory = categoryService.findAll();
+		Page<Product> ListProduct = productService.getAllProd(page);
+		List<Product> response = ListProduct.getContent();
+		 
+		return response;
+	}
+	
+	
+	@GetMapping("/shop/page")
+    public  ModelAndView shopPage(@RequestParam(defaultValue = "0") int page) {
+        int pageSize = 10;
+        Page<Product> productsPage = productService.getAllProd(page);
+        List<Category> ListCategory = categoryService.findAll();
+        ModelAndView modelAndView = new ModelAndView("productList");
+        modelAndView.addObject("ListProduct", productsPage.getContent());
+        modelAndView.addObject("pageNo", page);
+        modelAndView.addObject("totalPage", productsPage.getTotalPages());
+        modelAndView.addObject("ListCategory", ListCategory);
+        return modelAndView;
+    }
+	
+	
 	@GetMapping("/login")
 	public String login() {
 		return "login";
@@ -80,5 +129,11 @@ public class Controller {
 	@GetMapping("/ajax")
 	public String ajax() {
 		return "ajax";
+	}
+	
+	@GetMapping("/detail")
+	public String detail(@RequestParam int idProduct) {
+		
+		return "detail";
 	}
 }
