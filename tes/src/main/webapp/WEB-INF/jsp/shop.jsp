@@ -11,7 +11,7 @@
 <meta content="Free HTML Templates" name="description">
 
 <!-- Favicon -->
-<link href="img/favicon.ico" rel="icon">
+<link href="${pageContext.request.contextPath}/img/favicon.ico" rel="icon">
 
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -25,12 +25,12 @@
 	rel="stylesheet">
 
 <!-- Libraries Stylesheet -->
-<link href="lib/animate/animate.min.css" rel="stylesheet">
-<link href="lib/owlcarousel/assets/owl.carousel.min.css"
+<link href="${pageContext.request.contextPath}/lib/animate/animate.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/owlcarousel/assets/owl.carousel.min.css"
 	rel="stylesheet">
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -96,7 +96,7 @@
 
 
 			<!-- hien thi san pham Start -->
-			<div class="col-lg-9 col-md-8">
+			<div id="content" class="col-lg-9 col-md-8">
 				<div class="row pb-3">
 					<div class="col-12 pb-1">
 						<!-- bo loc -->
@@ -128,13 +128,12 @@
 							</div>
 						</div>
 						<!--ket thuc bo loc -->
-					</div>
-					<!--cho nay hien thi san pham -->
-					<div id="content" class="row">
-
+					
+					<div  class="row">
+							
 						<c:forEach items="${ListProduct}" var="product">
 
-							<div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+							<div class="col-lg-4 col-md-6 col-sm-6 pb-1 " id="product-item">
 								<div class="product-item bg-light mb-4">
 									<div class="product-img position-relative overflow-hidden py-4">
 										<img class="img-fluid w-100" src="img/${product.getImgPath()}"
@@ -174,6 +173,44 @@
 				</div>
 			</div>
 
+			<nav aria-label="Page navigation example">
+				<ul class="pagination" id="pagination">
+				  
+				  <!-- <li class="page-item"><a class="page-link"  onclick="fetchProducts((event),${pageNo-1})">Previous</a></li>
+				  <li class="page-item"><a class="page-link" href="#">${totalPage}</a></li>
+				  <li class="page-item"><a class="page-link" href="#">${pageNo+2}</a></li>
+				  <li class="page-item"><a class="page-link" href="#">${pageNo+3}</a></li>
+				  <li class="page-item"><a class="page-link" onclick="fetchProducts((event),${pageNo+1})">Next</a></li> -->
+
+
+				  <%-- Nút Previous --%>
+        <c:if test="${pageNo > 0}">
+            <li class="page-item"><a class="page-link"  onclick="fetchProducts((event),${pageNo-1})">Previous</a></li>
+        </c:if>
+
+        <%-- Liên kết đến các trang --%>
+        <c:forEach begin="1" end="${totalPage}" var="pageNum">
+            <c:choose>
+                <c:when test="${pageNum - 1 == pageNo }">
+                    
+					<li class="page-item"><a class="page-link" href="#" onclick="fetchProducts((event),${pageNum - 1})"><strong>${pageNum}</strong></a></li>
+                </c:when>
+                <c:otherwise>
+                    <li class="page-item"><a class="page-link" href="#" onclick="fetchProducts((event),${pageNum - 1})">${pageNum}</a></li>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+
+        <%-- Nút Next --%>
+        <c:if test="${pageNo < totalPage}">
+            <li class="page-item"><a class="page-link" onclick="fetchProducts((event),${pageNo+1})">Next</a></li>
+        </c:if>
+
+				</ul>
+			  </nav>
+</div>
+					<!--cho nay hien thi san pham -->
+				
 			<!-- hien thi san pham End -->
 		</div>
 	</div>
@@ -192,8 +229,8 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-	<script src="lib/easing/easing.min.js"></script>
-	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/easing/easing.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/owlcarousel/owl.carousel.min.js"></script>
 
 
 
@@ -221,13 +258,120 @@
 		}
 		
 	</script>
+	
+	<script >
+	
+	
+	    const productList = $('#content');
+	    const paginationContainer = $('#pagination');
+		
+	    function fetchProducts(event,page) {
+			
+			let number = page;
+			if (number < 0) {
+				number += 1 ;
+			} else {
+			
+			}
+			console.log(number);
+	        $.ajax({
+	            url: `/shop/page${number}`,
+	            type: 'GET',
+				 data: {
+        page: number// Thay số ID bằng giá trị thực tế mà bạn muốn truy vấn
+    },
+	            success: function(response) {
+					console.log(response);
+
+	                // displayProducts((event),response,number);
+				
+					$('#content').html(response);
+					
+	                event.preventDefault();
+	                
+	            }
+	        });
+
+			
+    }
+	        
+	    
+
+// 	    function displayProducts(event,products,page) {
+// 	    	console.log(products);
+// 	        var productListDiv = document.getElementById("content");
+//         productListDiv.innerHTML = ""; // Xóa nội dung cũ
+			
+// 			console.log(Array.isArray(products));
+			
+// 	        products.forEach(product => {
+
+// 				var productDiv = document.createElement("div");
+// 				productDiv.className = "col-lg-4 col-md-6 col-sm-6 pb-1";
+// 	            productDiv.innerHTML = `
+
+
+// 	<div class="product-item bg-light mb-4">
+// 		<div class="product-img position-relative overflow-hidden py-4">
+// 			<img class="img-fluid w-100" src="img/`+product.imgPath+`"
+// 				alt="">
+// 			<div class="product-action">
+// 				<a class="btn btn-outline-dark btn-square"
+// 					href="addtocart?ProductID=${product.productID}&soluong=1"><i
+// 					class="fa fa-shopping-cart"></i></a> <a
+// 					class="btn btn-outline-dark btn-square"
+// 					href="detail?ProductID=${product.productID}"><i
+// 					class="fa fa-search"></i></a>
+// 			</div>
+// 		</div>
+// 		<div class="text-center py-4">
+// 			<a class="h5 text-decoration-none text-truncate"
+// 				href="detail?ProductID=${product.getProductID()}">${product.getProductName()}</a>
+// 			<div
+// 				class="d-flex align-items-center justify-content-center mt-2">
+// 				<h5>${product.getUnit_price()}${product.getPrice()}</h5>
+// 				<h6 class="text-muted ml-2">
+// 					<del>${product.getUnit_price()}${product.getPrice()}</del>
+// 				</h6>
+// 			</div>
+// 			<div
+// 				class="d-flex align-items-center justify-content-center mb-1">
+// 				<p class="text-dark">${rvDAO.avgTotalStarReviews(product.getProductID())}
+// 					<i class="fa fa-star text-primary mr-1"></i>(${rvDAO.totalReviewsOfProductID(product.getProductID())}
+// 					Reviews)
+// 				</p>
+
+// 			</div>
+// 		</div>
+// 	</div>
+
+// `;
+				
+// 				// console.log(product.imgPath)
+// 	            // productList.append(productDiv);
+// 				productListDiv.appendChild(productDiv)
+// 	            event.preventDefault();
+// 	        });
+			
+// 	    }
+
+	    
+
+	   function clickPageNumber(event, page){
+			fetchProducts(page);
+			
+	   }
+	
+	
+	
+	</script>
 
 	<!-- Contact Javascript File -->
-	<script src="mail/jqBootstrapValidation.min.js"></script>
-	<script src="mail/contact.js"></script>
+	<script src="${pageContext.request.contextPath}/mail/jqBootstrapValidation.min.js"></script>
+	<script src="${pageContext.request.contextPath}/mail/contact.js"></script>
 
 	<!-- Template Javascript -->
-	<script src="js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 
 
