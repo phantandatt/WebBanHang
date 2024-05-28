@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,7 @@
 <body>
 	<div class="login-container">
 		<h1>Đăng Nhập</h1>
-		<form class="mess" action="login" method="post">
+		<form class="mess" action="check" method="post">
 			<p align="center">${mess}</p>
 			<label for="username">Tên người dùng:</label> <input type="text"
 				id="username" name="username" required> <label
@@ -22,6 +23,14 @@
 				Chưa có tài khoản? <a href="register">Đăng ký ngay</a>
 			</p>
 		</form>
+		<%-- <form:form method="Post" modelAttribute="account" action="check">
+			<p align="center">${mess}</p>
+			<label for="username">Tên người dùng:</label>
+			<form:input path="username" id="username" />
+			<label for="password">Mật khẩu:</label>
+			<form:input path="password" id="password" />
+			<form:button disabled="">dang nhap</form:button>
+		</form:form> --%>
 	</div>
 </body>
 </html>
