@@ -34,16 +34,13 @@ public class Controller {
 	private AccountService service;
 	@Autowired
 	private DiscountService discountService;
-<<<<<<< Updated upstream
+
 	@Autowired
 	private ProductService productService;
 	@Autowired
 	private CategoryService categoryService;
-=======
+
 	
-	@Autowired
-	private ProductService productService;
->>>>>>> Stashed changes
 
 	@GetMapping("/home")
 	public String getHomePage(Model model) {
@@ -71,7 +68,7 @@ public class Controller {
 	}
 
 	@GetMapping("/shop")
-<<<<<<< Updated upstream
+
 	public String shop(Model model, @RequestParam(defaultValue = "0")int page) {
 		List<Category> ListCategory = categoryService.findAll();
 		
@@ -81,11 +78,6 @@ public class Controller {
 		model.addAttribute("totalPage", ListProduct.getTotalPages());
 		model.addAttribute("pageNo",page);
 		model.addAttribute("ListCategory", ListCategory);
-=======
-	public String shop() {
-		
->>>>>>> Stashed changes
-		
 		return "shop";
 	}
 	
