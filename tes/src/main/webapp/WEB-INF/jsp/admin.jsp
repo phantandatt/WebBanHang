@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html>
@@ -9,6 +9,9 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -20,6 +23,7 @@
 
 
 <link rel="stylesheet" href="css/styles-admin.css" />
+
 <title>Admin</title>
 </head>
 
@@ -149,7 +153,7 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<form class="form-user" method="get" action="admin">
+										<!-- <form class="form-user" method="get" action="admin">
 											<div class="form-group">
 												<input type="hidden" class="form-control" name="action"
 													placeholder="" value="themmagiamgia">
@@ -169,7 +173,28 @@
 													mã giảm giá</button>
 											</div>
 
-										</form>
+										</form> -->
+
+										<form:form method="post" action="admin/them"
+											modelAttribute="discount" id="frmDiscount" name="frmDiscount">
+											<div class="form-group">
+												<input type="hidden" class="form-control" name="action"
+													placeholder="" value="themmagiamgia">
+											</div>
+											<div class="form-group">
+												<label>Mã giảm giá *</label>
+												<form:input path="code" id="code" />
+											</div>
+
+											<div class="form-group">
+												<label>Giá trị %</label>
+												<form:input path="value" id="value" />
+											</div>
+											<div class="form-group">
+												<button id="save" type="button" class="btn btn-primary"
+													onclick="addDiscount()">Thêm mã giảm giá</button>
+											</div>
+										</form:form>
 									</div>
 
 
@@ -202,8 +227,9 @@
 											<button type="button" class="btn btn-primary"
 												data-toggle="modal"
 												data-target="#suamagiamgia${discount.getCode()}">Sửa</button>
-											| <a class="btn btn-danger"
-											href="admin?action=xoamagiamgia&code=${discount.getCode()}">Xóa</a>
+											<a class="btn btn-danger"
+											href="admin/delete?code=${discount.getCode()}">Xóa</a>
+
 										</td>
 
 									</tr>
@@ -631,16 +657,49 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 	<script>
-		var el = document.getElementById("wrapper");
+		/* var el = document.getElementById("wrapper");
 		var toggleButton = document.getElementById("menu-toggle");
 
 		toggleButton.onclick = function() {
 			el.classList.toggle("toggled");
 		};
+		 */
+		var isNew = true;
+		var studid = null;
+		//Add Records
+		function addDiscount() {
+			if (true) {
+				var url = "";
+				var data = "";
+				var method;
+				const code = $('#code').val();
+				const value = $('#value').val();
+				if (isNew == true) {
+					url = 'http://localhost:8080/admin/them';
+					data = $("#frmDiscount").serialize();
+					method = 'POST'
+				}
+				$.ajax({
+					type : method,
+					url : url,
+					dataType : "JSON",
+					data : data,
+					success : function(data) {
+						$('#code').val("");
+						$('#value').val("");
+						console.log(data);
+						getall();
+						if (data.status == "success") {
+							alert("Record Addedd");
+						} else {
+							alert("Record Updateedddd");
+						}
+					}
+				});
+
+			}
+		}
 	</script>
-	<script data-cfasync="false"
-		src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript">

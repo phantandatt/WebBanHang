@@ -9,5 +9,5 @@ import model.Account;
 
 @Repository
 public interface AccountRespository extends JpaRepository<Account, String> {
-
+	boolean existsByUsernameAndPassword(String username, String password);
 }

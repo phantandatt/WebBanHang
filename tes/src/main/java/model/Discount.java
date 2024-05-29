@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 public class Discount {
 	@Id
 	String code;
-	@Column
+	@Column(name = "value_code")
 	int value;
 
 	public Discount(String code, int value) {
@@ -28,6 +28,14 @@ public class Discount {
 
 	public int getValue() {
 		return value;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
 	}
 
 	@Override

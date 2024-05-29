@@ -34,12 +34,11 @@ public class Controller {
 	private AccountService service;
 	@Autowired
 	private DiscountService discountService;
-
 	@Autowired
 	private ProductService productService;
 	@Autowired
 	private CategoryService categoryService;
-
+	
 	
 
 	@GetMapping("/home")
@@ -68,7 +67,6 @@ public class Controller {
 	}
 
 	@GetMapping("/shop")
-
 	public String shop(Model model, @RequestParam(defaultValue = "0")int page) {
 		List<Category> ListCategory = categoryService.findAll();
 		
@@ -78,6 +76,7 @@ public class Controller {
 		model.addAttribute("totalPage", ListProduct.getTotalPages());
 		model.addAttribute("pageNo",page);
 		model.addAttribute("ListCategory", ListCategory);
+		
 		return "shop";
 	}
 	
