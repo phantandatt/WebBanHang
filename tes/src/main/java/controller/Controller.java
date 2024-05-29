@@ -45,6 +45,7 @@ public class Controller {
 	public String getHomePage(Model model) {
 		List<Category> ListCategory = categoryService.findAll();
 		List<Product> ListProduct = productService.getAllProd();
+		
 
 		model.addAttribute("ListProduct", ListProduct);
 		model.addAttribute("ListCategory", ListCategory);
