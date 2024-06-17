@@ -68,4 +68,29 @@ public class Account {
 				+ ", address=" + address + ", role=" + role + "]";
 	}
 
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
+	
+
 }

@@ -106,16 +106,16 @@ public class Controller {
     }
 	
 	
-	@GetMapping("/login")
-	public String login() {
-		return "login";
-	}
-
-	@GetMapping("/register")
-	public String register() {
-		JSONArray list = new JSONArray();
-		return "register";
-	}
+//	@GetMapping("/login")
+//	public String login() {
+//		return "login";
+//	}
+//
+//	@GetMapping("/register")
+//	public String register() {
+//		JSONArray list = new JSONArray();
+//		return "register";
+//	}
 
 	@GetMapping("/ajax")
 	public String ajax() {
@@ -126,5 +126,9 @@ public class Controller {
 	public String detail(@RequestParam int idProduct) {
 		
 		return "detail";
+	}
+	@GetMapping("/test")
+	public @ResponseBody String test() {
+		return "s";
 	}
 }

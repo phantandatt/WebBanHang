@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 public class Discount {
 	@Id
 	String code;
-	@Column(name = "value_code")
+	@Column(name = "value")
 	int value;
 
 	public Discount(String code, int value) {

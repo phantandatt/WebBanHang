@@ -175,7 +175,7 @@
 
 										</form> -->
 
-										<form:form method="post" action="admin/them"
+										<%-- <form:form method="post" action="admin/them"
 											modelAttribute="discount" id="frmDiscount" name="frmDiscount">
 											<div class="form-group">
 												<input type="hidden" class="form-control" name="action"
@@ -194,7 +194,7 @@
 												<button id="save" type="button" class="btn btn-primary"
 													onclick="addDiscount()">Thêm mã giảm giá</button>
 											</div>
-										</form:form>
+										</form:form> --%>
 									</div>
 
 

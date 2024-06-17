@@ -2,14 +2,19 @@ package model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "cart")
+
 public class Cart {
 	@Id
 	@Column
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String username;
 	@Column
 	private int productID;
@@ -31,6 +36,14 @@ public class Cart {
 		this.price = price;
 		this.imgPath = imgPath;
 	}
+	
+	
+
+	public Cart() {
+		super();
+	}
+
+
 
 	public String getUsername() {
 		return username;

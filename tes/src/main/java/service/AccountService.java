@@ -43,4 +43,19 @@ public class AccountService {
 	public Account getAcc(String id) {
 		return accountRepository.findById(id).get();
 	}
+
+	public boolean emailExists(String email) {
+		// TODO Auto-generated method stub
+		return accountRepository.existsByEmail(email);
+	}
+
+	public void save(Account account) {
+		// TODO Auto-generated method stub
+		accountRepository.save(account);
+	}
+
+	public boolean emailUser(String username) {
+		// TODO Auto-generated method stub
+		return accountRepository.existsById(username);
+	}
 }
