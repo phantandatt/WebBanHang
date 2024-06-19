@@ -23,4 +23,10 @@ public class CartService {
 	
 		return cartRespository.findByUsername(username);
 	}
+
+
+	public void save(Cart newCart) {
+		// TODO Auto-generated method stub
+		cartRespository.save(newCart);
+	}
 }

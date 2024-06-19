@@ -35,4 +35,9 @@ public class ProductService {
 	public long totalProduct() {
 		return resp.count();
 	}
+
+	public Product findById(int productId) {
+		// TODO Auto-generated method stub
+		return resp.findById(productId);
+	}
 }

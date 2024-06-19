@@ -14,7 +14,9 @@ import jakarta.persistence.Table;
 public class Cart {
 	@Id
 	@Column
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idCart;
+	@Column
 	private String username;
 	@Column
 	private int productID;
