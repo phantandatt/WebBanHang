@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 
+import handler.LoginFailureHandler;
 import handler.LoginSuccessHandler;
 
 @Configuration
@@ -23,6 +24,9 @@ public class SecurityConfig {
 	
 		@Autowired
 		LoginSuccessHandler successHandler;
+		
+		@Autowired
+		LoginFailureHandler failureHandler;
 		@Autowired
 		private CustomUserDetailsService userDetailsService;
 	   @Bean
@@ -41,8 +45,10 @@ public class SecurityConfig {
 	           authorizeRequests
 	      
 	               .requestMatchers("/login","/register", "/WEB-INF/jsp/**","/css/**", "/js/**", "/img/**").permitAll()
-	               
-	               .anyRequest().authenticated()
+	               .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
+	                .requestMatchers("/**").hasAnyAuthority("USER")
+	                .anyRequest().authenticated()
+	            
 	       )
 	       .formLogin(formLogin -> 
 	           {
@@ -50,7 +56,7 @@ public class SecurityConfig {
 					formLogin
 					   .loginPage("/login").permitAll()
 					   .successHandler(successHandler)
-					   
+					   .failureHandler(failureHandler)
 					   .and().logout().permitAll()
 					   .and().exceptionHandling().accessDeniedPage("/error/403");
 				} catch (Exception e) {
@@ -83,6 +89,7 @@ public class SecurityConfig {
 	        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 	        authProvider.setUserDetailsService(userDetailsService);
 	        authProvider.setPasswordEncoder(passwordEncoder());
+	        
 	        return authProvider;
 	    }
 	    

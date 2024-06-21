@@ -112,6 +112,11 @@ public class Controller {
 		return "ajax";
 	}
 	
+	@GetMapping("/error/403")
+	public String error() {
+		return "403";
+	}
+	
 
 	@GetMapping("/test")
 	public @ResponseBody String test() {

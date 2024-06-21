@@ -2,6 +2,10 @@ package SecurityConfig;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.management.relation.Role;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,8 +26,14 @@ public class MyUserDetails implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(account.getRole()==1?"ADMIN":"USER");
-        return Arrays.asList(authority);
+//		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(account.getRole()==1?"ADMIN":"USER");
+		 Set<GrantedAuthority> authorities = new HashSet<>();
+	        
+	        // Add roles as GrantedAuthority
+	       authorities.add(new SimpleGrantedAuthority(account.getRole()==1?"ADMIN":"USER"));
+	        
+		
+        return authorities;
 	}
 
 	@Override

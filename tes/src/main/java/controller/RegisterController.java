@@ -65,7 +65,7 @@ public class RegisterController {
 	        	Date dob = useFormRegister.getDob();
 	        	String email = useFormRegister.getEmail();
 	        	String address = useFormRegister.getAddress();
-	        	Account account = new Account(username, password, password, email, address, 0);
+	        	Account account = new Account(username, password, dob.toString(), email, address, 0);
 	        	accountService.save(account);
 	            response.put("status", "success");
 	            response.put("message", "User registered successfully");
