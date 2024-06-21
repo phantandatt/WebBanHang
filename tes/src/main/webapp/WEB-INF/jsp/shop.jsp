@@ -139,9 +139,18 @@
 										<img class="img-fluid w-100" src="img/${product.getImgPath()}"
 											alt="">
 										<div class="product-action">
-											<a class="btn btn-outline-dark btn-square"
+											<%-- <a class="btn btn-outline-dark btn-square"
 												href="addtocart?ProductID=${product.getProductID()}&soluong=1"><i
-												class="fa fa-shopping-cart"></i></a> <a
+												class="fa fa-shopping-cart"></i></a>  --%>
+												<form action="cart" method="post" class="btn btn-outline-dark btn-square">
+    												<input type="hidden" name="ProductID" value="${product.getProductID()}">
+  													  <input type="hidden" name="soluong" value="1">
+    												<button type="submit" class="btn btn-outline-dark btn-square">
+        											<i class="fa fa-shopping-cart"></i>
+    												</button>
+													</form>
+												
+												<a
 												class="btn btn-outline-dark btn-square"
 												href="detail?ProductID=${product.getProductID()}"><i
 												class="fa fa-search"></i></a>

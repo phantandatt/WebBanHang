@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import jakarta.websocket.Session;
 import model.Account;
 import model.UseFormRegister;
 import service.AccountService;
@@ -28,7 +32,8 @@ public class RegisterController {
 	 AccountService accountService;
 	
 	 @GetMapping(value = {"","/"})
-	  public String loginPage(Model model) {
+	  public String loginPage(Model model,HttpSession session) {
+		 	session.removeAttribute("mess");
 	        Account accountDTO = new Account();
 	        model.addAttribute("accountDTO", accountDTO);
 	        model.addAttribute("error", null);
@@ -40,9 +45,10 @@ public class RegisterController {
 	    }
 	  
 	  @PostMapping(value = {"","/"})
-	  public  Map<String, Object> submitForm(@Valid @ModelAttribute("useForm") UseFormRegister useFormRegister, BindingResult bindingResult) {
+	  public  Map<String, Object> submitForm(@Valid @ModelAttribute("useForm") UseFormRegister useFormRegister, BindingResult bindingResult, HttpSession session) {
 	        Map<String, Object> response = new HashMap<>();
-	        System.out.println("1");
+	        
+	        System.out.println("submitForm");
 	        if (accountService.emailUser(useFormRegister.getUsername())) {
 	            bindingResult.rejectValue("username", "error.username", "Tài khoản đã tồn tại");
 	        }
@@ -56,7 +62,7 @@ public class RegisterController {
 	            bindingResult.getFieldErrors().forEach(fieldError -> 
 	                response.put(fieldError.getField(), fieldError.getDefaultMessage()));
 	            response.put("status", "error");
-	            
+	            session.setAttribute("mess", "Đăng Kí Không Thành Công"); 
 	           
 	        } else {
 	            // Save account to the database if no errors
@@ -65,12 +71,17 @@ public class RegisterController {
 	        	Date dob = useFormRegister.getDob();
 	        	String email = useFormRegister.getEmail();
 	        	String address = useFormRegister.getAddress();
-	        	Account account = new Account(username, password, dob.toString(), email, address, 0);
+	        	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	            String encodedPassword = passwordEncoder.encode(password);
+	        	Account account = new Account(username, encodedPassword, dob.toString(), email, address, 0);
+	        	System.out.println(encodedPassword);
 	        	accountService.save(account);
 	            response.put("status", "success");
 	            response.put("message", "User registered successfully");
 //	            response.put("email1", account.getEmail());
+	           
 	        }
+	        
 	        System.out.println(response);
 	        return response;
 	    }

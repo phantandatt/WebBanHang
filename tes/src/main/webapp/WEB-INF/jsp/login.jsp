@@ -13,7 +13,7 @@
 	<div class="login-container">
 		<h1>Đăng Nhập</h1>
 		<form class="mess" action="/login" method="post">
-			<p align="center">${mess}</p>
+			<p align="center" style="color: red; size: 9px;">${mess}</p>
 			<label for="username">Tên người dùng:</label> <input type="text"
 				id="username" name="username" required> <label
 				for="password">Mật khẩu:</label> <input type="password"

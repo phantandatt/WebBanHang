@@ -73,12 +73,14 @@ public class SecurityConfig {
 	   
 		@Bean
 	    public BCryptPasswordEncoder passwordEncoder() {
-	String passwordToEncode = "123456";
-	        
-	        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	        String encodedPassword = passwordEncoder.encode(passwordToEncode);
-	        
-	        System.out.println("Mật khẩu đã mã hóa: " + encodedPassword);
+//	String passwordToEncode = "123456";
+//	        
+//	        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//	        
+//	        String encodedPassword = passwordEncoder.encode(passwordToEncode);
+//	        boolean isPasswordMatch = passwordToEncode.matches(encodedPassword);
+//	        
+//	        System.out.println("Mật khẩu đã mã hóa: " + encodedPassword);
 	        return new BCryptPasswordEncoder();
 	    }
 		

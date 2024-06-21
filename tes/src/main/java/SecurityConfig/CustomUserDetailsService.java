@@ -26,11 +26,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 		if (account == null) {
 			throw new UsernameNotFoundException("User not found");
 		}
-String passwordToEncode = account.getPassword();
-        
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(passwordToEncode);
-        account.setPassword(encodedPassword);
+//String passwordToEncode = account.getPassword();
+//        
+//        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        String encodedPassword = passwordEncoder.encode(passwordToEncode);
+        account.setPassword(account.getPassword());
 		System.out.println(account);
 		return new MyUserDetails(account);
 	}

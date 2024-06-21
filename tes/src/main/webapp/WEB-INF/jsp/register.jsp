@@ -160,7 +160,8 @@ h2 {
                 <form:errors path="address" cssClass="error"/>
         </div>
         <div class="form-group">
-            <button type="submit" value="Đăng ký">Đăng Ký</button>
+           <!--  <button type="submit" value="Đăng ký">Đăng Ký</button> -->
+            <button  value="Đăng ký">Đăng Ký</button>
         </div>
     </form:form>
 <!-- 	</div>
@@ -206,7 +207,7 @@ h2 {
         $(document).ready(function() {
         	console.log('Document ready!');
             $('#registerForm').on('submit', function(event) {
-             /*    event.preventDefault(); */
+                 /* event.preventDefault();  */
                 $.ajax({
                     type: 'POST',
                     url: '${pageContext.request.contextPath}/register', 
@@ -215,7 +216,7 @@ h2 {
                     dataType: 'json',
                     success: function(response) {
                     	console.log(response);
-                    	    event.preventDefault();
+                    	    /* event.preventDefault(); */
                         $('.error').html(''); // Clear previous errors
                         if (response.status === 'error') {
                             for (const field in response) {

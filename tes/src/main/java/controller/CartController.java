@@ -35,14 +35,16 @@ public class CartController  {
 //	}
 	
 	@GetMapping("/cart")
-	public ModelAndView getCartByUserName(@RequestParam String username) {
+	public ModelAndView getCartByUserName(HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView("cart");
+		Account account = (Account) session.getAttribute("acc");
+		 String username = account.getUsername();
 		List<Cart> liCarts = cartService.getCartByUsername(username);
 		modelAndView.addObject("ListCart", liCarts);
 		return modelAndView;
 	}
 	
-	@GetMapping("/addtocart")
+	@PostMapping("/cart")
 	public ModelAndView addtoCart(@RequestParam int ProductID, @RequestParam int soluong, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView("cart");
 		Product product = service.findById(ProductID);

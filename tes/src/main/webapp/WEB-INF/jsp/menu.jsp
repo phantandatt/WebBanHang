@@ -71,7 +71,7 @@
 			<div class="col-lg-auto  col-6 text-right d-flex">
 
 				<div class="cart px-3">
-					<a href="cart" class="btn border "> <i
+					<a href="/cart?username=${sessionScope.acc.getUsername()}" class="btn border "> <i
 						class="fas fa-shopping-cart text-dark"></i> <span class="badge">${cart.getAllCartByUser(sessionScope.acc.getUsername())}</span>
 					</a>
 
