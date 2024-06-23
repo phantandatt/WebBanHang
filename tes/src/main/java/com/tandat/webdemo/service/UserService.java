@@ -34,14 +34,14 @@ public class UserService implements UserDetailsService {
         return new CustomUserDetails(user);
     }
 
-    public boolean registerUser(String userName,String passwrod) {
+    public boolean registerUser(User user) {
     	// đăng ký user
-    	if(userRepository.findByUsername(userName).isPresent()) {
+    	if(userRepository.findByUsername(user.getUsername()).isPresent()) {
     		return false;
     	}
     	// mã hóa mật khẩu
     	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
-    	User user = User.builder().username(userName).password(passwordEncoder.encode(passwrod)).build();
+    	user.setPassword(passwordEncoder.encode(user.getPassword()));
     	userRepository.save(user);
     	
     	return true;

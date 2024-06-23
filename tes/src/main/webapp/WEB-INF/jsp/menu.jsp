@@ -80,7 +80,6 @@
 
 
 					<div>
-						<c:if test="${sessionScope.acc!=null}">
 							<div class="dropdown">
 								<a class="btn btn-secondary dropdown-toggle" role="button"
 									data-bs-toggle="dropdown" aria-expanded="false">
@@ -90,12 +89,9 @@
 									<li><a class="dropdown-item" href="profile">Thông tin
 											tài khoản</a></li>
 									<li><a class="dropdown-item" href="cart?username=${sessionScope.acc.getUsername()}">Giỏ hàng</a></li>
-									<li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+									<li><a class="dropdown-item" href="logoutPerfome">Đăng xuất</a></li>
 								</ul>
 							</div>
-						</c:if>
-						<a style="text-decoration: none;" class="text-body mr-3 h5"
-								href="/logout}">Logout</a>
 											
 					</div>
 
