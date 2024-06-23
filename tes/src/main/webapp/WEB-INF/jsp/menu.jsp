@@ -80,10 +80,6 @@
 
 
 					<div>
-						<c:if test="${sessionScope.acc==null}">
-							<a style="text-decoration: none;" class="text-body mr-3 h5"
-								href="login">Đăng nhập</a>
-						</c:if>
 						<c:if test="${sessionScope.acc!=null}">
 							<div class="dropdown">
 								<a class="btn btn-secondary dropdown-toggle" role="button"
@@ -98,6 +94,9 @@
 								</ul>
 							</div>
 						</c:if>
+						<a style="text-decoration: none;" class="text-body mr-3 h5"
+								href="/logout}">Logout</a>
+											
 					</div>
 
 				</div>

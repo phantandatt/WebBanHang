@@ -1,36 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trang Đăng Nhập</title>
-<link rel="stylesheet" href="css/style-login.css">
+<title>Login</title>
 </head>
 <body>
-	<div class="login-container">
-		<h1>Đăng Nhập</h1>
-		<form class="mess" action="/login" method="post">
-			<p align="center" style="color: red; size: 9px;">${mess}</p>
-			<label for="username">Tên người dùng:</label> <input type="text"
-				id="username" name="username" required> <label
-				for="password">Mật khẩu:</label> <input type="password"
-				id="password" name="password" required>
-			<button type="submit">Đăng nhập</button>
-			<p>
-				Chưa có tài khoản? <a href="register">Đăng ký ngay</a>
-			</p>
-		</form>
-		<%-- <form:form method="Post" modelAttribute="account" action="check">
-			<p align="center">${mess}</p>
-			<label for="username">Tên người dùng:</label>
-			<form:input path="username" id="username" />
-			<label for="password">Mật khẩu:</label>
-			<form:input path="password" id="password" />
-			<form:button disabled="">dang nhap</form:button>
-		</form:form> --%>
-	</div>
+	<h2>Login Page</h2>
+	<form action="/loginPerfome" method="post">
+		<div>
+			<label>Username:</label> <input type="text" name="username" />
+		</div>
+		<div>
+			<label>Password:</label> <input type="password" name="password" />
+		</div>
+		<div>
+			<button type="submit">Login</button>
+		</div>
+		<a href="/registerPerfome"> Register </a>
+		<c:if test="${param.error != null}">
+			<div style="color: red;">Invalid username or password.</div>
+		</c:if>
+		<c:if test="${param.logout != null}">
+			<div style="color: green;">You have been logged out.</div>
+		</c:if>
+	</form>
 </body>
 </html>

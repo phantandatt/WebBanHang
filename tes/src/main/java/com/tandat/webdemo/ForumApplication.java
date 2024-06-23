@@ -12,10 +12,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 //@ComponentScan(basePackages = "com.tandat.Forum,controller,model")
-@ComponentScan({ "com.tandat.Forum", "controller", "model", "service", "respository","SecurityConfig","handler" })
-@ConfigurationPropertiesScan({"SecurityConfig"})
-@EntityScan(basePackages =  "model")
-@EnableJpaRepositories("respository")
+//@ComponentScan({ "com.tandat.Forum", "controller", "model", "service", "respository","SecurityConfig","handler" })
+//@EntityScan(basePackages =  "model")
+//@EnableJpaRepositories("respository")
 
 public class ForumApplication extends SpringBootServletInitializer {
 	@Override
