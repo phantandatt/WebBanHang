@@ -28,9 +28,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig {
 	@Autowired
 	UserService userService;
-
+	
+	// Cch url có thể vào không cần login
 	private final String[] PUBLIC_ENDPOINTS = { "/css/**", "/WEB-INF/**", "/registerPerfome", "/login" };
-
+	
+	// dùng userService cho spring security
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -50,12 +52,12 @@ public class SecurityConfig {
 
 	@Bean
 	UserDetailsManager inMemoryUserDetailManageer() {
-		// tên và mật khẩu
+		// tên và mật khẩu thêm vào spring security
 		var admin = User.withUsername("admin").password("{noop}admin").roles("ADMIN").build();
 		var user = User.withUsername("user").password("{noop}user").roles("USER").build();
 		return new InMemoryUserDetailsManager(admin, user);
 	}
-
+	// mã hóa mật khẩu
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(10);

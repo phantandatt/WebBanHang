@@ -48,6 +48,7 @@ class LoginController {
 	@PostMapping("/registerPerfome")
 	ModelAndView registerPost(@RequestParam("username") String username, @RequestParam("password") String password,
 			RedirectAttributes redirectAttributes) {
+		// Đăng ký user
 		if (userService.registerUser(username, password)) {
 			return new ModelAndView("/loginPerfome");
 		}

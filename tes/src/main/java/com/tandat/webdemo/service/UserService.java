@@ -22,7 +22,8 @@ public class UserService implements UserDetailsService {
 
      UserRepository userRepository;
 
-
+     
+     // kiểm tra user tồn tại không
     @Override
     public UserDetails loadUserByUsername(String username) {
         // Kiểm tra xem user có tồn tại trong database không?
@@ -34,10 +35,11 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean registerUser(String userName,String passwrod) {
-    	
+    	// đăng ký user
     	if(userRepository.findByUsername(userName).isPresent()) {
     		return false;
     	}
+    	// mã hóa mật khẩu
     	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
     	User user = User.builder().username(userName).password(passwordEncoder.encode(passwrod)).build();
     	userRepository.save(user);

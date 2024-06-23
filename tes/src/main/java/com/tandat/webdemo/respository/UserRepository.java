@@ -9,5 +9,6 @@ import com.tandat.webdemo.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+	// tìm kiếm bằng userName
 	Optional<User> findByUsername(String username);
 }

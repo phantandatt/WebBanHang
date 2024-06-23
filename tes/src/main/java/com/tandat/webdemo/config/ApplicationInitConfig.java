@@ -18,6 +18,8 @@ import lombok.experimental.FieldDefaults;
 @RequiredArgsConstructor
 public class ApplicationInitConfig {
     PasswordEncoder passwordEncoder;
+    
+    // hàm chạy ban đầu khi khởi chạy chương trình để tạo ra user mẫu testing
     @Bean
     ApplicationRunner applicationRunner(UserRepository userRepository){
         return args -> {
