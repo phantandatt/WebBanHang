@@ -121,119 +121,42 @@ h2 {
 			</div>
 		</form> --%>
 		
-<h3 class="mess" align="center">${mess}</h3>
-    <form:form id="registerForm" modelAttribute="useForm">
+    <h3 class="mess" align="center">${message}</h3>
+    <form:form id="registerForm" modelAttribute="registerForm" action="/registerPerfome" method="POST">
         <div class="form-group">
-             <form:label path="username">Tên tài khoản:</form:label> 
+            <form:label path="username">Tên tài khoản:</form:label>
             <form:input path="username" id="username" required="true"/>
-            <div id="usernameError" class="error"></div>
-                <form:errors path="username" cssClass="error"/>
+            <form:errors path="username" cssClass="error"/>
         </div>
         <div class="form-group">
             <form:label path="password">Mật khẩu:</form:label>
-            <form:password path="password" id="password" />
-            <div id="passwordError" class="error"></div>
-                <form:errors path="password" cssClass="error"/>
+            <form:password path="password" id="password"/>
+            <form:errors path="password" cssClass="error"/>
         </div>
         <div class="form-group">
             <form:label path="againPassword">Nhập lại mật khẩu:</form:label>
             <form:password path="againPassword" id="againPassword"/>
-            <div id="againPasswordError" class="error"></div>
-                <form:errors path="againPassword" cssClass="error"/>
+            <form:errors path="againPassword" cssClass="error"/>
         </div>
         <div class="form-group">
             <form:label path="dob">Ngày sinh:</form:label>
             <form:input path="dob" type="date" id="dob" required="true"/>
-              <div id="dobError" class="error"></div>
-                <form:errors path="dob" cssClass="error"/>
+            <form:errors path="dob" cssClass="error"/>
         </div>
         <div class="form-group">
             <form:label path="email">Email:</form:label>
             <form:input path="email" type="email" id="email" required="true"/>
-            <div id="emailError" class="error"></div>
-                <form:errors path="email" cssClass="error"/>
+            <form:errors path="email" cssClass="error"/>
         </div>
         <div class="form-group">
             <form:label path="address">Địa chỉ:</form:label>
             <form:input path="address" id="address" required="true"/>
-            <div id="addressError" class="error"></div>
-                <form:errors path="address" cssClass="error"/>
+            <form:errors path="address" cssClass="error"/>
         </div>
         <div class="form-group">
             <button type="submit" value="Đăng ký">Đăng Ký</button>
+            <a class="btn" href="/loginPerfome"> Login </a>
         </div>
     </form:form>
-<!-- 	</div>
-	<script src="js/validation.js"></script>
-	<script>
-		document
-				.addEventListener(
-						'DOMContentLoaded',
-						function() {
-							// Mong muốn của chúng ta
-							Validator({
-								form : '#form-1',
-								formGroupSelector : '.form-group',
-								errorSelector : '.form-message',
-								rules : [
-										Validator
-												.isRequired('#fullname',
-														'Vui lòng nhập tên đầy đủ của bạn'),
-										Validator.isEmail('#email'),
-										Validator.minLength('#password', 6),
-										Validator
-												.isRequired('#password_confirmation'),
-										Validator
-												.isConfirmed(
-														'#password_confirmation',
-														function() {
-															return document
-																	.querySelector('#form-1 #password').value;
-														},
-														'Mật khẩu nhập lại không chính xác') ],
-								onSubmit : function(data) {
-									// Call API
-									console.log(data);
-								}
-							});
-
-						});
-	</script> -->
-	
-	
-	
-	<script>
-        $(document).ready(function() {
-        	console.log('Document ready!');
-            $('#registerForm').on('submit', function(event) {
-             /*    event.preventDefault(); */
-                $.ajax({
-                    type: 'POST',
-                    url: '${pageContext.request.contextPath}/register', 
-                   /*  url: '/register', */
-                    data: $(this).serialize(),
-                    dataType: 'json',
-                    success: function(response) {
-                    	console.log(response);
-                    	    event.preventDefault();
-                        $('.error').html(''); // Clear previous errors
-                        if (response.status === 'error') {
-                            for (const field in response) {
-                                if (field !== 'status') {
-                                	console.log(response[field])
-                                    $('#' + field + 'Error').html(response[field]);
-                                }
-                            }
-                        } else if (response.status === 'success') {
-                        	/* window.location.href = '${pageContext.request.contextPath}/register-success?email='+ response.email1; */
-                        	console.log('Redirecting to login page...');
-                        	$('.mess').html('dang ky thanh cong')
-                        	window.location.href = '${pageContext.request.contextPath}/login';
-                        }
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

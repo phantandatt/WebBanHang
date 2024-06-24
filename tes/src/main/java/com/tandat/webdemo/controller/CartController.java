@@ -1,4 +1,4 @@
-package controller;
+package com.tandat.webdemo.controller;
 
 import java.util.List;
 
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.servlet.http.HttpSession;
-import model.Account;
-import model.Cart;
-import model.Product;
-import service.CartService;
-import service.ProductService;
+import com.tandat.webdemo.model.Account;
+import com.tandat.webdemo.model.Cart;
+import com.tandat.webdemo.model.Product;
+import com.tandat.webdemo.service.CartService;
+import com.tandat.webdemo.service.ProductService;
 
 @Controller
 public class CartController  {

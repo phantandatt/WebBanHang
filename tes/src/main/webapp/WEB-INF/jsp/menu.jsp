@@ -71,7 +71,7 @@
 			<div class="col-lg-auto  col-6 text-right d-flex">
 
 				<div class="cart px-3">
-					<a href="cart" class="btn border "> <i
+					<a href="/cart?username=${sessionScope.acc.getUsername()}" class="btn border "> <i
 						class="fas fa-shopping-cart text-dark"></i> <span class="badge">${cart.getAllCartByUser(sessionScope.acc.getUsername())}</span>
 					</a>
 
@@ -80,11 +80,6 @@
 
 
 					<div>
-						<c:if test="${sessionScope.acc==null}">
-							<a style="text-decoration: none;" class="text-body mr-3 h5"
-								href="login">Đăng nhập</a>
-						</c:if>
-						<c:if test="${sessionScope.acc!=null}">
 							<div class="dropdown">
 								<a class="btn btn-secondary dropdown-toggle" role="button"
 									data-bs-toggle="dropdown" aria-expanded="false">
@@ -94,10 +89,10 @@
 									<li><a class="dropdown-item" href="profile">Thông tin
 											tài khoản</a></li>
 									<li><a class="dropdown-item" href="cart?username=${sessionScope.acc.getUsername()}">Giỏ hàng</a></li>
-									<li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+									<li><a class="dropdown-item" href="logoutPerfome">Đăng xuất</a></li>
 								</ul>
 							</div>
-						</c:if>
+											
 					</div>
 
 				</div>

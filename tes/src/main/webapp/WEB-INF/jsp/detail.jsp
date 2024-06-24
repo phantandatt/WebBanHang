@@ -88,7 +88,7 @@
 						<small class="pt-1">(${TotalReviewsOfProductID} Reviews)</small>
 					</div>
 					<h3 class="font-weight-semi-bold mb-4">${product.getUnit_price()}${product.getPrice()}</h3>
-					<form action="addtocart" method="get">
+					<form action="cart" method="post">
 						<input type="hidden" value="${product.getProductID()}"
 							name="ProductID">
 

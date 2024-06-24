@@ -1,31 +1,25 @@
-package controller;
+package com.tandat.webdemo.controller;
 
-import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
-import org.json.JSONArray;
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import model.Account;
-import model.Category;
-import model.Discount;
-import model.Product;
-import service.AccountService;
-import service.CategoryService;
-import service.DiscountService;
-import service.ProductService;
+import com.tandat.webdemo.model.Account;
+import com.tandat.webdemo.model.Category;
+import com.tandat.webdemo.model.Discount;
+import com.tandat.webdemo.model.Product;
+import com.tandat.webdemo.service.AccountService;
+import com.tandat.webdemo.service.CategoryService;
+import com.tandat.webdemo.service.DiscountService;
+import com.tandat.webdemo.service.ProductService;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @org.springframework.stereotype.Controller
 
@@ -43,6 +37,12 @@ public class Controller {
 
 	@GetMapping("/home")
 	public String getHomePage(Model model) {
+		// Cách lấy user đang đăng nhập (tự set vào sử dụng)
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		System.out.print(currentPrincipalName);
+		///
+		System.out.print(false);
 		List<Category> ListCategory = categoryService.findAll();
 		List<Product> ListProduct = productService.getAllProd();
 
@@ -122,4 +122,6 @@ public class Controller {
 	public @ResponseBody String test() {
 		return "s";
 	}
+	
+	
 }
