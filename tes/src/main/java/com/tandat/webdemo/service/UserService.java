@@ -1,5 +1,6 @@
 package com.tandat.webdemo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,7 +23,7 @@ import lombok.experimental.FieldDefaults;
 // để thiết lập access level và final cho tất cả các field.
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserService implements UserDetailsService {
-
+	@Autowired
 	UserRepository userRepository;
 
 // Spring Security để tải thông tin người dùng từ cơ sở dữ liệu khi người dùng đăng nhập
