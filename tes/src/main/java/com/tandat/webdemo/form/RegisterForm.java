@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Data
 public class RegisterForm {
 
+
 	@NotBlank(message = "Tên tài khoản không được để trống")
 	@Size(min = 5, max = 15, message = "Tên tài khoản phải từ 5 đến 15 ký tự")
 	private String username;
@@ -36,7 +37,7 @@ public class RegisterForm {
 
 	// Getters and setters
 
-	// Custom validation to check if password and againPassword match
+	// Phương thức này kiểm tra xem password và againPassword có khớp nhau hay không
 	public boolean isPasswordsMatch() {
 		return password != null && password.equals(againPassword);
 	}

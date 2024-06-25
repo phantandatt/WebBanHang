@@ -15,18 +15,24 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+// được quản lý bởi JPA (Java Persistence API).
 @Entity
+// tên bảng account entity sẽ ánh xạ tới
 @Table(name = "account")
-@Data // lombok
+
+@Data // lombok, tự động tạo các getter, setter, phương thức toString(), equals(), và hashCode()
+// Cung cấp một builder pattern cho việc khởi tạo đối tượng
 @Builder
+// Tạo các constructors không có tham số và có tham số cho entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-	@Id
+	// id primary key của bảng
+	@Id 
+	// Được sử dụng để tự động tạo giá trị cho trường id
 	@GeneratedValue
 	private Long id;
-
+// là một cột trong bảng với ràng buộc unique và không cho phép null
 	@Column(nullable = false, unique = true)
 	private String username;
 	private String password;
