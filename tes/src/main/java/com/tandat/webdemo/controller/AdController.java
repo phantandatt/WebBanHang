@@ -27,8 +27,6 @@ import com.tandat.webdemo.service.CategoryService;
 import com.tandat.webdemo.service.DiscountService;
 import com.tandat.webdemo.service.ProductService;
 
-
-
 @Controller
 @RequestMapping(value = "/admin")
 public class AdController {
@@ -74,19 +72,49 @@ public class AdController {
 		return discountService.saveDiscount(discount);
 	}
 
-//	@PutMapping("/{id}")
-	@PostMapping(value = "them")
-//	@ResponseBody
-	public String updateDiscount(@ModelAttribute("discount") Discount discount, RedirectAttributes redirectAttributes) {
-		discountService.saveDiscount(discount);
+	@GetMapping(value = "them")
+	public String createDiscount(@RequestParam("code") String code, @RequestParam("ValueOfCode") int value) {
+		discountService.saveDiscount(code, value);
 		return "redirect:/admin";
 	}
 
-//	@DeleteMapping("/{id}")
 	@GetMapping("/delete")
-//	@ResponseBody
 	public String deleteDiscount(@RequestParam("code") String code, RedirectAttributes redirectAttributes) {
 		discountService.deleteDiscount(code);
+		return "redirect:/admin";
+	}
+
+	@GetMapping("/xoataikhoan")
+	public String deleteAccount(@RequestParam String username, RedirectAttributes redirectAttributes) {
+		accountService.deleteAccount(username);
+		return "redirect:/admin";
+	}
+
+	@GetMapping("/setrole")
+	public String setRole(@RequestParam String username, RedirectAttributes redirectAttributes) {
+		Account acc = accountService.getAcc(username);
+		switch (acc.getRole()) {
+		case 1:
+			acc.setRole(0);
+			break;
+		case 0:
+			acc.setRole(1);
+			break;
+		default:
+			break;
+		}
+		accountService.setRole(username, acc.getRole());
+		return "redirect:/admin";
+	}
+
+	@GetMapping("/suamagiamgia")
+	public String editValueDiscount(@RequestParam("code") String code, @RequestParam("ValueOfCode") int valueOfCode) {
+		discountService.updateValue(code, valueOfCode);
+		return "redirect:/admin";
+	}
+	@GetMapping("/xoasanpham")
+	public String deleteProduct(@RequestParam("ProductID") int idProduct) {
+		productService.deleteById(idProduct);
 		return "redirect:/admin";
 	}
 }

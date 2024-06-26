@@ -31,6 +31,10 @@ public class DiscountService {
 	public Optional<Discount> getDiscountById(String id) {
 		return discountRepository.findById(id);
 	}
+	public Discount saveDiscount(String code, int value) {
+		Discount dc = new Discount(code, value);
+		return discountRepository.save(dc);
+	}
 
 	public Discount saveDiscount(Discount discount) {
 		return discountRepository.save(discount);
@@ -38,5 +42,8 @@ public class DiscountService {
 
 	public void deleteDiscount(String id) {
 		discountRepository.deleteById(id);
+	}
+	public void updateValue(String code, int newValue) {
+		discountRepository.updateVauleOfCode(code, newValue);
 	}
 }

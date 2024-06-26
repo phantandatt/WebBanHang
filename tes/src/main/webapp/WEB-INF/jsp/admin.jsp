@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
@@ -36,7 +36,7 @@
 			<div
 				class="sidebar-heading text-center px-4 py-4 primary-text fs-4 fw-bold text-uppercase border-bottom bg-light">
 				<div class="col-lg-2">
-					<a href="admin" class="text-decoration-none"> <span
+					<a href="home" class="text-decoration-none"> <span
 						class="h1 text-uppercase text-warning bg-dark px-2">Phone</span> <span
 						class="h1 text-uppercase text-dark bg-warning px-2 ml-n1">Store</span>
 					</a>
@@ -153,11 +153,7 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<!-- <form class="form-user" method="get" action="admin">
-											<div class="form-group">
-												<input type="hidden" class="form-control" name="action"
-													placeholder="" value="themmagiamgia">
-											</div>
+										<form class="form-user" method="get" action="admin/them">
 
 											<div class="form-group">
 												<label>Mã giảm giá *</label> <input type="text"
@@ -173,14 +169,10 @@
 													mã giảm giá</button>
 											</div>
 
-										</form> -->
+										</form>
 
-										<%-- <form:form method="post" action="admin/them"
+										<%-- <form:form method="get" action="admin/them"
 											modelAttribute="discount" id="frmDiscount" name="frmDiscount">
-											<div class="form-group">
-												<input type="hidden" class="form-control" name="action"
-													placeholder="" value="themmagiamgia">
-											</div>
 											<div class="form-group">
 												<label>Mã giảm giá *</label>
 												<form:input path="code" id="code" />
@@ -250,7 +242,8 @@
 													</button>
 												</div>
 												<div class="modal-body">
-													<form class="form-user" method="get" action="admin">
+													<form class="form-user" method="get"
+														action="admin/suamagiamgia">
 														<div class="form-group">
 															<input type="hidden" class="form-control" name="action"
 																placeholder="" value="suamagiamgia">
@@ -399,9 +392,9 @@
 												test="${!sessionScope.acc.getUsername().equals(account.getUsername())}">
 												<a class="btn btn-primary" style="text-decoration: none;"
 													class="fw-bold"
-													href="admin?action=setrole&username=${account.getUsername()}">Set
+													href="admin/setrole?username=${account.getUsername()}">Set
 													role</a> | <a class="btn btn-danger"
-													href="admin?action=xoataikhoan&username=${account.getUsername()}">Xóa</a>
+													href="admin/xoataikhoan?username=${account.getUsername()}">Xóa</a>
 											</c:if></td>
 									</tr>
 								</c:forEach>
@@ -435,61 +428,46 @@
 									</div>
 									<div class="modal-body">
 
-										<form class="form-user" method="post" action="admin"
-											enctype="multipart/form-data">
-											<div class="form-group">
-												<input type="hidden" class="form-control" name="action"
-													value="themsanpham">
-											</div>
-											<div class="form-group">
+										<form class="form-user" method="post"
+											action="admin/themsanpham" enctype="multipart/form-data">
+											<%-- <div class="form-group">
 												<label>Mã sản phẩm</label> <input readonly="readonly"
 													type="text" class="form-control" name="ProductID"
 													value="${pDAO.getLastProductID()+1}">
-											</div>
+											</div> --%>
 											<div class="form-group">
 												<label>Tên sản phẩm</label> <input type="text"
-													class="form-control" name="tensanpham"
-													value="${product.getProductName()}">
+													class="form-control" name="tensanpham">
 											</div>
 
 											<div class="form-group">
 												<label>Phân loại</label>
 												<div>
 													<select name="phanloai" class="form-control">
-														<c:forEach items="${CateDAO.getAllCategory()}"
-															var="category">
-
-															<c:if
-																test="${product.getCategoryID()==category.getIdCategory()}">
-																<option selected="selected">${category.getNameCategory()}</option>
-															</c:if>
-
-															<c:if
-																test="${product.getCategoryID()!=category.getIdCategory()}">
-																<option>${category.getNameCategory()}</option>
-															</c:if>
+														<c:forEach items="${ListCategory}" var="category">
+															<option>${category.getNameCategory()}</option>
 														</c:forEach>
 													</select>
+
 												</div>
 											</div>
 											<div class="form-group">
 												<label>Mô tả</label>
 												<textarea class="form-control" name="mota" rows="3">
-															${product.getDescription()}
+														
 															</textarea>
 											</div>
 											<div class="form-group">
 												<label>Giá</label> <input type="text" class="form-control"
-													name="gia" value="${product.getPrice()}">
+													name="gia">
 											</div>
 											<div class="form-group">
 												<label>Số lượng</label> <input type="text"
-													class="form-control" name="soluongkho"
-													value="${product.getStockQuantity()}">
+													class="form-control" name="soluongkho">
 											</div>
 											<div class="form-group">
 												<label>Màu</label> <input type="text" class="form-control"
-													name="mau" value="${product.getColor()}">
+													name="mau">
 											</div>
 											<div class="form-group">
 												<label>Hình ảnh</label> <input type="file"
@@ -542,7 +520,7 @@
 												data-toggle="modal"
 												data-target="#suasanpham${product.getProductID()}">Sửa</button>
 											| <a class="btn btn-danger"
-											href="admin?action=xoasanpham&ProductID=${product.getProductID()}">Xóa</a>
+											href="admin/xoasanpham?ProductID=${product.getProductID()}">Xóa</a>
 										</td>
 
 									</tr>
@@ -585,17 +563,17 @@
 															<label>Phân loại</label>
 															<div>
 																<select name="phanloai" class="form-control">
-																	<c:forEach items="${CateDAO.getAllCategory()}"
+																	<c:forEach items="${ListCategory}"
 																		var="category">
 
 																		<c:if
 																			test="${product.getCategoryID()==category.getIdCategory()}">
-																			<option selected="selected">${category.getNameCategory()}</option>
+																			<option selected="selected">${category.Category()}</option>
 																		</c:if>
 
 																		<c:if
 																			test="${product.getCategoryID()!=category.getIdCategory()}">
-																			<option>${category.getNameCategory()}</option>
+																			<option>${category.Category()}</option>
 																		</c:if>
 																	</c:forEach>
 																</select>

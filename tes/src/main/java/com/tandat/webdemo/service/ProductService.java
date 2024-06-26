@@ -44,4 +44,7 @@ public class ProductService {
 		// TODO Auto-generated method stub
 		return resp.findById(productId);
 	}
+	public void deleteById(int productId) {
+		resp.deleteById(productId);
+	}
 }
