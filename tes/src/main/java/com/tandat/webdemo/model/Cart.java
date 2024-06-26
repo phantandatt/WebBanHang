@@ -7,10 +7,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "cart")
-
+@Getter
+@Setter
 public class Cart {
 	@Id
 	@Column
@@ -47,29 +50,7 @@ public class Cart {
 
 
 
-	public String getUsername() {
-		return username;
-	}
 
-	public int getProductID() {
-		return productID;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public int getAmount() {
-		return amount;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public String getImgPath() {
-		return imgPath;
-	}
 
 	@Override
 	public String toString() {

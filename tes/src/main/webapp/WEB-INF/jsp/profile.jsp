@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,11 +80,11 @@
 						</div>
 						<div class="tab-pane fade" id="account-change-password">
 							<div class="card-body pb-2">
-								<form action="profile" method="post">
-									<div class="form-group">
-										<input name="action" value="changepass" type="hidden"
+								<form action="profile/changepassword" method="post">
+									<%-- <div class="form-group">
+										<input name="accountName" value="${sessionScope.acc.getUsername()}" type="hidden"
 											class="form-control">
-									</div>
+									</div> --%>
 									<div class="form-group">
 										<label class="form-label">Mật khẩu hiện tại</label> <input
 											required name="currentPassword" type="password"

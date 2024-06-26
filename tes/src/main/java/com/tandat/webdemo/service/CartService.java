@@ -29,4 +29,30 @@ public class CartService {
 		// TODO Auto-generated method stub
 		cartRespository.save(newCart);
 	}
+
+
+	public void updateSoLuong(Long id_cart,int amount) {
+		// TODO Auto-generated method stub
+		cartRespository.update(id_cart,amount);
+	}
+	
+	public boolean contain(List<Cart> carts, int productID) {
+		for (Cart cart : carts) {
+			if(cart.getProductID() == productID)
+				return true;
+		}
+		return false;
+	}
+
+
+	public void deleteCart(Long idCart) {
+		// TODO Auto-generated method stub
+		cartRespository.deleteById(idCart);
+	}
+
+
+	public void increaseCart(Long idCart, int soluong) {
+		// TODO Auto-generated method stub
+		cartRespository.increaseCart(idCart,soluong);
+	}
 }

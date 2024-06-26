@@ -93,8 +93,10 @@
 								<td class="align-middle">
 									<div class="input-group quantity mx-auto" style="width: 100px;">
 										<div class="input-group-btn">
+										<!-- admin/setrole?username -->
 											<a
-												href="cart?action=giamsoluong&ProductID=${cart.getProductID()}&code=${code}"
+											
+												href="cart/tangsoluong?idCart=${cart.getIdCart()}&soluong=${cart.getAmount()-1}"
 												class="btn btn-sm btn-primary btn-minus"> <i
 												class="fa fa-minus"></i>
 											</a>
@@ -104,17 +106,21 @@
 											value="${cart.getAmount()}">
 										<div class="input-group-btn">
 											<a
-												href="cart?action=tangsoluong&ProductID=${cart.getProductID()}&code=${code}"
+												href="cart/tangsoluong?idCart=${cart.getIdCart()}&soluong=${cart.getAmount()+1}"
 												class="btn btn-sm btn-primary btn-plus"> <i
 												class="fa fa-plus"></i>
 											</a>
 										</div>
 									</div>
 								</td>
+								<%-- href="cart/deleteProduct?ProductID=${cart.getProductID()}&code=${code}" --%>
 								<td class="align-middle">$
 									${cart.getPrice()*cart.getAmount()}</td>
+									
+									
 								<td class="align-middle"><a
-									href="cart?action=deleteProduct&ProductID=${cart.getProductID()}&code=${code}"
+									
+									href="cart/deleteProduct?idCart=${cart.getIdCart()}"
 									class="btn btn-sm btn-danger"> <i class="fa fa-times"></i>
 								</a></td>
 							</tr>

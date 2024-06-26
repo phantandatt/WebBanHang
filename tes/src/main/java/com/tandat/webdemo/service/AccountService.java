@@ -35,7 +35,15 @@ public class AccountService {
 	public Account savePerson(Account person) {
 		return accountRepository.save(person);
 	}
-
+	public boolean updateAccount(String account, String newPassword) {
+		System.out.println("Cap nhat tai khoan thanh cong");
+		int updatedRows = accountRepository.updateAccount(account, newPassword);
+        return updatedRows > 0;
+	}
+public boolean setRole(String account, int role) {
+	int updateRole = accountRepository.updateRole(account,role);
+	return updateRole>0;
+}
 	public void deleteAccount(String id) {
 		accountRepository.deleteById(id);
 	}

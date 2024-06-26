@@ -22,8 +22,12 @@ public class ProductService {
 		resp.save(product);
 
 	}
-	
-	public List<Product> getAllProd(){
+
+	public List<Product> searchProducts(String keyword) {
+		return resp.findByProductName(keyword);
+	}
+
+	public List<Product> getAllProd() {
 		return resp.findAll();
 	}
 

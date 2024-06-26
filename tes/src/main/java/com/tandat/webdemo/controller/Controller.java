@@ -21,6 +21,8 @@ import com.tandat.webdemo.service.DiscountService;
 import com.tandat.webdemo.service.ProductService;
 import com.tandat.webdemo.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 
 @org.springframework.stereotype.Controller
@@ -39,10 +41,12 @@ public class Controller {
 	private UserService userService;
 
 	@GetMapping("/home")
-	public String getHomePage(Model model) {
+	public String getHomePage(Model model,HttpSession session) {
 		// Cách lấy user đang đăng nhập (tự set vào sử dụng)
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
+		Account account = service.getAcc(currentPrincipalName);
+		session.setAttribute("acc", account);
 		System.out.print(currentPrincipalName);
 		///
 		System.out.print(false);
@@ -124,6 +128,19 @@ public class Controller {
 	@GetMapping("/test")
 	public @ResponseBody String test() {
 		return "s";
+	}
+	
+	@GetMapping("/search")
+	public ModelAndView searchProducts(@RequestParam("search") String keyword) {
+		ModelAndView view = new ModelAndView("shop");
+		List<Product> ListProduct = productService.searchProducts(keyword);
+		List<Category> ListCategory = categoryService.findAll();
+
+		view.addObject("ListCategory", ListCategory);
+		view.addObject("ListProduct", ListProduct);
+		productService.searchProducts(keyword);
+
+		return view;
 	}
 
 }
