@@ -8,10 +8,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tandat.webdemo.model.Account;
 import com.tandat.webdemo.model.Cart;
 import com.tandat.webdemo.service.CartService;
+import com.tandat.webdemo.service.DiscountService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,6 +22,8 @@ public class PayController {
 
 	@Autowired
 	CartService cartService;
+	@Autowired
+	DiscountService discountService;
 
 	@GetMapping("/checkout")
 	public String checkoutpage(Model model) {
@@ -40,7 +44,14 @@ public class PayController {
 	}
 
 	@GetMapping("/applyDiscount")
-	public String applyDiscount() {
+	public String applyDiscount(Model model, @RequestParam("code") String code) {
+		int valueOfCode = 0;
+		if (discountService.checkDiscount(code)) {
+			valueOfCode = discountService.value(code);
+		}
+		model.addAttribute("ValueOfCode", valueOfCode);
+		model.addAttribute(code, code);
 		return "/checkout";
 	}
+
 }

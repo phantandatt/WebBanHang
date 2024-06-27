@@ -162,7 +162,7 @@
 				</div>
 			</div>
 		</form>
-		<form class="mb-30" action="discount" method="get">
+		<form class="mb-30" action="applyDiscount" method="get">
 			<div class="input-group">
 				<input name="code" type="text"
 					class="form-control border-0-1 p-4 bg-gray"
