@@ -141,13 +141,11 @@
 							<h6>$${totalPrice}</h6>
 						</div>
 						<div class="d-flex justify-content-between">
-							<h6 class="font-weight-medium">Shipping</h6>
-							<h6 class="font-weight-medium">$10</h6>
 						</div>
-						<div class="d-flex justify-content-between">
+						<%-- <div class="d-flex justify-content-between">
 							<h6 class="font-weight-medium">Discount</h6>
 							<h6 class="font-weight-medium">${ValueOfCode}%</h6>
-						</div>
+						</div> --%>
 					</div>
 					<div class="pt-2">
 						<div class="d-flex justify-content-between mt-2">

@@ -15,14 +15,14 @@ import com.tandat.webdemo.service.CartService;
 
 import jakarta.servlet.http.HttpSession;
 
-
 @Controller
 public class PayController {
 
 	@Autowired
 	CartService cartService;
+
 	@GetMapping("/checkout")
-	public String checkoutpage( Model model) {
+	public String checkoutpage(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
 		List<Cart> carts = cartService.getCartByUsername(username);
@@ -35,7 +35,12 @@ public class PayController {
 		System.out.println(i);
 		model.addAttribute("ListCart", carts);
 		model.addAttribute("TotalPrice", TotalPrice);
-		
+
 		return "checkout";
+	}
+
+	@GetMapping("/applyDiscount")
+	public String applyDiscount() {
+		return "/checkout";
 	}
 }
