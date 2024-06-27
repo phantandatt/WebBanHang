@@ -42,6 +42,12 @@ public class CartController  {
 		ModelAndView modelAndView = new ModelAndView("cart");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
+		List<Cart> carts = cartService.getCartByUsername(username);
+		double TotalPrice = 0;
+		for (Cart cart : carts) {
+			TotalPrice += cart.getPrice();
+		}
+		modelAndView.addObject("totalPrice", TotalPrice);
 		
 		List<Cart> liCarts = cartService.getCartByUsername(username);
 		modelAndView.addObject("ListCart", liCarts);
